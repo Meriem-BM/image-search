@@ -1,27 +1,16 @@
-// Get the image link from the user
-const imageLink = prompt('Enter image link');
+async function searchAliexpressByImage(imageLink) {
+  // Encode the image link to be used in the search query
+  const encodedImageLink = encodeURIComponent(imageLink);
 
-// Perform the search with "site:aliexpress.com"
-const searchQuery = `site:aliexpress.com ${imageLink}`;
-const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}&tbm=isch`;
+  // Build the search query
+  const searchQuery = `https://localhost:5000/search?q=${encodedImageLink}`;
 
-// Make a request to the search URL and parse the HTML response
-fetch(searchUrl)
-  .then(response => response.text())
-  .then(html => {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
-    const images = doc.querySelectorAll('img.rg_i');
+  // Make the search request
+  const response = await fetch(searchQuery);
+  const results = await response.json();
 
-    // Display the images on your website
-    const resultsContainer = document.getElementById('results-container');
-    images.forEach(img => {
-      const src = img.getAttribute('src');
-      const result = document.createElement('img');
-      result.src = src;
-      resultsContainer.appendChild(result);
-    });
-  });
-
+  // Return the search results
+  return results;
+}
 
 
