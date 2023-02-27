@@ -11,6 +11,7 @@ def search():
 
     # Construct the search query URL with site:aliexpress.com
     query_url = f'https://www.google.com/search?q=site%3Aaliexpress.com%20{image_link}&tbm=isch&tbs=itp:photo'
+    print(query_url)
 
     # Fetch the search results page
     response = requests.get(query_url, headers={'User-Agent': 'Mozilla/5.0'})

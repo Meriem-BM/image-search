@@ -1,1 +1,17 @@
-<script type="text/javascript" src="image.js"></script>
+<body>
+    <!-- your HTML code here -->
+    <input type="text" id="image-link" placeholder="Enter image link...">
+    <button id="search-button">Search</button>
+    <script src="image.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const searchButton = document.getElementById('search-button');
+        searchButton.addEventListener('click', async () => {
+          const imageLink = document.getElementById('image-link').value;
+          const results = await searchAliexpressByImage(imageLink);
+          console.log(results);
+        });
+      });
+    </script>
+  </body>
+  
